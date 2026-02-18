@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1] - 2025-02-18
+
+### Fixed
+- Include cli.js and examples/ in release archive
+
 ## [3.1.0] - 2025-02-18
 
 ### Added
