@@ -53,6 +53,48 @@ cd mcp-discord
 npm install
 ```
 
+### Quick Test
+
+Test your bot connection in seconds:
+
+```bash
+# 1. Create .env file with your token
+echo "DISCORD_TOKEN=your_bot_token_here" > .env
+
+# 2. Test connection
+node examples/test-connection.js
+```
+
+Or use the CLI:
+
+```bash
+node cli.js login
+```
+
+### CLI Tool
+
+The included CLI makes common operations easy:
+
+```bash
+# Show help
+node cli.js help
+
+# List server info
+node cli.js list-roles
+node cli.js list-channels
+node cli.js list-members
+
+# Create channels
+node cli.js channel-create --name my-channel
+node cli.js channel-create --name private --private --users user1,user2
+
+# Send messages
+node cli.js message-send --channel 123456789 --message "Hello!"
+
+# Manage roles
+node cli.js role-create --name "New Role" --color "#FF0000"
+```
+
 ### Configuration
 
 #### Option 1: Environment Variables (Recommended)
@@ -226,6 +268,25 @@ SendMessagesInThreads
 ---
 
 ## Examples
+
+### Ready-to-use Scripts
+
+Check the `examples/` folder for practical scripts:
+
+| Script | Description |
+|--------|-------------|
+| `test-connection.js` | Verify bot connection |
+| `create-private-channel.js` | Create private channels with users/roles |
+| `send-announcement.js` | Send formatted embed announcements |
+| `list-server-info.js` | Display server roles, channels, members |
+| `bulk-role-assign.js` | Assign roles to multiple users |
+
+```bash
+# Edit CONFIG in the script, then run:
+node examples/create-private-channel.js
+```
+
+### MCP Tool Examples
 
 ### Hide category from @everyone
 ```javascript
