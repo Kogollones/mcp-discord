@@ -4,12 +4,15 @@
   "description": "Extended Discord MCP server with role management, permissions, voice channels, caching, rate limiting, and more",
   "main": "build/index.js",
   "bin": {
-    "mcp-discord": "build/index.js"
+    "mcp-discord": "build/index.js",
+    "mcp-discord-cli": "cli.js"
   },
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build/index.js",
+    "cli": "node cli.js",
+    "test:connection": "node examples/test-connection.js",
     "prepublishOnly": "echo 'Ready to publish'"
   },
   "keywords": [
@@ -46,8 +49,13 @@
   "homepage": "https://github.com/Kogollones/mcp-discord#readme",
   "files": [
     "build/",
+    "cli.js",
+    "examples/",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md",
+    ".env.example",
+    "config.example.json"
   ],
   "engines": {
     "node": ">=20.0.0"

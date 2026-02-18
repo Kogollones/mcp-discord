@@ -44,6 +44,19 @@ All notable changes to this project will be documented in this file.
 - **Login Tool** (`tools/login.js`)
   - Dedicated Discord authentication handler
 
+- **CLI Tool** (`cli.js`)
+  - Command-line interface for common Discord operations
+  - Commands: login, list-roles, list-channels, list-members
+  - Commands: channel-create, channel-delete, message-send, role-create
+  - Support for private channels with --private --users flags
+
+- **Example Scripts** (`examples/`)
+  - `test-connection.js` - Quick bot connection test
+  - `create-private-channel.js` - Create private channels with users/roles
+  - `send-announcement.js` - Send formatted embed announcements
+  - `list-server-info.js` - Display server roles, channels, members
+  - `bulk-role-assign.js` - Assign roles to multiple users with dry-run support
+
 ### Changed
 - Improved error handling throughout all tools
 - Enhanced logging with sensitive data redaction
