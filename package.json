@@ -1,7 +1,7 @@
 {
   "name": "mcp-discord-extended",
-  "version": "2.0.0",
-  "description": "Extended Discord MCP server with role management, permissions, voice channels, and more",
+  "version": "3.0.0",
+  "description": "Extended Discord MCP server with role management, permissions, voice channels, caching, rate limiting, and more",
   "main": "build/index.js",
   "bin": {
     "mcp-discord": "build/index.js"
@@ -22,7 +22,10 @@
     "automation",
     "roles",
     "permissions",
-    "server-management"
+    "server-management",
+    "caching",
+    "rate-limiting",
+    "input-sanitization"
   ],
   "author": "Kogollones",
   "contributors": [

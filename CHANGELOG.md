@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2025-02-18
+
+### Added
+- **Caching System** (`cache.js`)
+  - TTL-based in-memory cache for Discord resources
+  - Separate namespaces for guilds, channels, roles, members
+  - Automatic cleanup with configurable intervals
+  - Cache invalidation by guild
+  - `fetchWithCache()` helper for transparent caching
+
+- **Rate Limiting** (`rateLimiter.js`)
+  - Priority-based request queue (HIGH, NORMAL, LOW)
+  - Concurrent request management
+  - Batch and sequential execution modes
+  - Automatic retry with exponential backoff
+  - Queue timeout handling
+  - Rate limit error detection and retry-after support
+
+- **Input Sanitization** (`sanitizer.js`)
+  - Discord snowflake ID validation
+  - Channel/role name sanitization
+  - Message content sanitization with length limits
+  - Forum title and topic sanitization
+  - Emoji validation
+  - User mention validation
+  - Payload size checking
+
+- **Configuration Management** (`config.js`)
+  - Priority: CLI args > ENV vars > config file > defaults
+  - Support for `.env` files
+  - JSON config file support
+  - Environment variable mappings
+  - Deep merge configuration
+
+- **Middleware** (`tools/middleware.js`)
+  - Handler wrapping with client ready checks
+  - Error handling wrapper
+  - Request context management
+
+- **Login Tool** (`tools/login.js`)
+  - Dedicated Discord authentication handler
+
+### Changed
+- Improved error handling throughout all tools
+- Enhanced logging with sensitive data redaction
+- Better rate limit awareness in API calls
+- Input validation on all user-provided data
+
+### Security
+- Added comprehensive input sanitization
+- Sensitive data redaction in logs
+- `.env` and config files excluded from git
+- Added `.env.example` and `config.example.json` templates
+- Added `start-bot.bat.example` template
+
 ## [2.0.0] - 2025-12-26
 
 ### Added

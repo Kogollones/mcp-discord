@@ -26,6 +26,15 @@ Extended [Model Context Protocol](https://modelcontextprotocol.io/) server for D
 | **Webhooks** | Create, edit, delete, send messages via webhooks |
 | **Batch** | Execute multiple operations in a single call |
 
+### v3.0 Advanced Features
+
+| Feature | Description |
+|---------|-------------|
+| **Caching** | TTL-based in-memory cache for guilds, channels, roles, members |
+| **Rate Limiting** | Priority queue (HIGH/NORMAL/LOW) with batch and sequential execution |
+| **Sanitization** | Input validation for Discord limits (snowflakes, names, messages) |
+| **Configuration** | Centralized config with CLI > ENV > file > defaults priority |
+
 ---
 
 ## Quick Start
@@ -46,6 +55,46 @@ npm install
 
 ### Configuration
 
+#### Option 1: Environment Variables (Recommended)
+
+Create a `.env` file in the project root:
+
+```env
+DISCORD_TOKEN=your_discord_bot_token_here
+DISCORD_APPLICATION_ID=your_application_id_here
+DISCORD_GUILD_ID=your_guild_id_here
+```
+
+#### Option 2: Config File
+
+Create a `config.json` based on `config.example.json`:
+
+```json
+{
+  "server": {
+    "port": 8080,
+    "logLevel": "info"
+  },
+  "discord": {
+    "token": null,
+    "gatewayIntents": ["Guilds", "GuildMessages", "MessageContent"]
+  },
+  "cache": {
+    "ttlGuilds": 300000,
+    "ttlChannels": 120000,
+    "ttlRoles": 300000,
+    "ttlMembers": 60000
+  },
+  "rateLimiter": {
+    "maxConcurrent": 5,
+    "highThreshold": 3,
+    "queueTimeout": 30000
+  }
+}
+```
+
+#### Option 3: Claude Desktop Config
+
 Add to your Claude Desktop (`claude_desktop_config.json`) or Claude Code settings:
 
 ```json
@@ -55,13 +104,23 @@ Add to your Claude Desktop (`claude_desktop_config.json`) or Claude Code setting
       "command": "node",
       "args": [
         "C:/path/to/mcp-discord/build/index.js",
-        "--config",
+        "--token",
         "YOUR_DISCORD_BOT_TOKEN"
       ]
     }
   }
 }
 ```
+
+#### CLI Options
+
+| Option | Description |
+|--------|-------------|
+| `--token` | Discord bot token |
+| `--config` | Path to config file |
+| `--transport` | Transport type: `stdio` or `http` |
+| `--port` | HTTP server port (default: 8080) |
+| `--log-level` | Log level: debug, info, warn, error |
 
 ---
 
