@@ -4,7 +4,6 @@
 [![Discord.js](https://img.shields.io/badge/Discord.js-14.25.1-5865F2?logo=discord&logoColor=white)](https://discord.js.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![MCP](https://img.shields.io/badge/MCP-Compatible-orange)](https://modelcontextprotocol.io/)
-[![Security](https://snyk.io/test/github/Kogollones/mcp-discord/badge.svg)](https://snyk.io/test/github/Kogollones/mcp-discord)
 
 > **Discord MCP server with advanced server management capabilities**
 
@@ -13,6 +12,8 @@ Extended [Model Context Protocol](https://modelcontextprotocol.io/) server for D
 ---
 
 ## Features
+
+### MCP Tools
 
 | Category | Capabilities |
 |----------|-------------|
@@ -26,7 +27,7 @@ Extended [Model Context Protocol](https://modelcontextprotocol.io/) server for D
 | **Webhooks** | Create, edit, delete, send messages via webhooks |
 | **Batch** | Execute multiple operations in a single call |
 
-### v3.0 Advanced Features
+### Advanced Features
 
 | Feature | Description |
 |---------|-------------|
@@ -34,6 +35,8 @@ Extended [Model Context Protocol](https://modelcontextprotocol.io/) server for D
 | **Rate Limiting** | Priority queue (HIGH/NORMAL/LOW) with batch and sequential execution |
 | **Sanitization** | Input validation for Discord limits (snowflakes, names, messages) |
 | **Configuration** | Centralized config with CLI > ENV > file > defaults priority |
+| **CLI Tool** | Command-line interface for common Discord operations |
+| **Examples** | Ready-to-use scripts for testing and automation |
 
 ---
 
@@ -55,184 +58,136 @@ npm install
 
 ### Quick Test
 
-Test your bot connection in seconds:
-
 ```bash
-# 1. Create .env file with your token
+# Create .env file
 echo "DISCORD_TOKEN=your_bot_token_here" > .env
 
-# 2. Test connection
-node examples/test-connection.js
-```
-
-Or use the CLI:
-
-```bash
+# Test connection
 node cli.js login
 ```
 
-### CLI Tool
+---
 
-The included CLI makes common operations easy:
+## CLI Tool
 
 ```bash
-# Show help
-node cli.js help
+node cli.js help                    # Show all commands
+node cli.js login                   # Test connection
 
-# List server info
+# Server info
 node cli.js list-roles
 node cli.js list-channels
 node cli.js list-members
 
-# Create channels
+# Channels
 node cli.js channel-create --name my-channel
 node cli.js channel-create --name private --private --users user1,user2
+node cli.js channel-delete --id 123456789
 
-# Send messages
+# Messages
 node cli.js message-send --channel 123456789 --message "Hello!"
 
-# Manage roles
-node cli.js role-create --name "New Role" --color "#FF0000"
+# Roles
+node cli.js role-create --name "Admin" --color "#FF0000"
 ```
 
-### Configuration
+---
 
-#### Option 1: Environment Variables (Recommended)
+## Configuration
 
-Create a `.env` file in the project root:
+### Environment Variables (Recommended)
+
+Create `.env` file:
 
 ```env
 DISCORD_TOKEN=your_discord_bot_token_here
-DISCORD_APPLICATION_ID=your_application_id_here
 DISCORD_GUILD_ID=your_guild_id_here
 ```
 
-#### Option 2: Config File
+### Claude Desktop / Claude Code
 
-Create a `config.json` based on `config.example.json`:
-
-```json
-{
-  "server": {
-    "port": 8080,
-    "logLevel": "info"
-  },
-  "discord": {
-    "token": null,
-    "gatewayIntents": ["Guilds", "GuildMessages", "MessageContent"]
-  },
-  "cache": {
-    "ttlGuilds": 300000,
-    "ttlChannels": 120000,
-    "ttlRoles": 300000,
-    "ttlMembers": 60000
-  },
-  "rateLimiter": {
-    "maxConcurrent": 5,
-    "highThreshold": 3,
-    "queueTimeout": 30000
-  }
-}
-```
-
-#### Option 3: Claude Desktop Config
-
-Add to your Claude Desktop (`claude_desktop_config.json`) or Claude Code settings:
+Add to `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "discord": {
       "command": "node",
-      "args": [
-        "C:/path/to/mcp-discord/build/index.js",
-        "--token",
-        "YOUR_DISCORD_BOT_TOKEN"
-      ]
+      "args": ["path/to/mcp-discord/build/index.js", "--token", "YOUR_TOKEN"]
     }
   }
 }
 ```
 
-#### CLI Options
-
-| Option | Description |
-|--------|-------------|
-| `--token` | Discord bot token |
-| `--config` | Path to config file |
-| `--transport` | Transport type: `stdio` or `http` |
-| `--port` | HTTP server port (default: 8080) |
-| `--log-level` | Log level: debug, info, warn, error |
-
 ---
 
-## Tools Reference
+## MCP Tools Reference
 
 ### Server & Login
 | Tool | Description |
 |------|-------------|
 | `discord_login` | Authenticate with Discord |
-| `discord_get_server_info` | Get server details, channels, members count |
-| `discord_send` | Send message to any channel |
+| `discord_get_server_info` | Get server details |
+| `discord_send` | Send message to channel |
 
-### Channel Management
+### Channels
 | Tool | Description |
 |------|-------------|
 | `discord_create_text_channel` | Create text channel |
-| `discord_create_voice_channel` | Create voice channel with bitrate/user limit |
-| `discord_edit_channel` | Edit name, topic, category, position, NSFW, slowmode |
-| `discord_delete_channel` | Delete any channel |
+| `discord_create_voice_channel` | Create voice channel |
+| `discord_edit_channel` | Edit channel properties |
+| `discord_delete_channel` | Delete channel |
 | `discord_create_category` | Create category |
 | `discord_edit_category` | Edit category |
 | `discord_delete_category` | Delete category |
 
-### Role Management
+### Roles
 | Tool | Description |
 |------|-------------|
-| `discord_list_roles` | List all server roles |
-| `discord_create_role` | Create role with color, permissions, hoist, mentionable |
-| `discord_edit_role` | Modify role properties |
-| `discord_delete_role` | Remove role |
-| `discord_assign_role` | Give role to member |
-| `discord_remove_role` | Take role from member |
+| `discord_list_roles` | List all roles |
+| `discord_create_role` | Create role with color/permissions |
+| `discord_edit_role` | Modify role |
+| `discord_delete_role` | Delete role |
+| `discord_assign_role` | Assign role to member |
+| `discord_remove_role` | Remove role from member |
 
-### Permission Management
+### Permissions
 | Tool | Description |
 |------|-------------|
-| `discord_set_channel_permissions` | Set allow/deny permissions for role or member |
-| `discord_get_channel_permissions` | View current permission overwrites |
-| `discord_remove_channel_permissions` | Remove permission overwrites |
+| `discord_set_channel_permissions` | Set allow/deny for role/member |
+| `discord_get_channel_permissions` | View permission overwrites |
+| `discord_remove_channel_permissions` | Remove overwrites |
 
-### Member Management
+### Members
 | Tool | Description |
 |------|-------------|
-| `discord_list_members` | List all members (filter bots optional) |
-| `discord_get_member` | Get member details, roles, permissions |
+| `discord_list_members` | List all members |
+| `discord_get_member` | Get member details |
 
-### Message Management
+### Messages
 | Tool | Description |
 |------|-------------|
-| `discord_read_messages` | Read channel messages (limit configurable) |
-| `discord_delete_message` | Delete single message |
-| `discord_bulk_delete_messages` | Delete up to 100 messages at once |
-| `discord_edit_message` | Edit message content |
+| `discord_read_messages` | Read channel messages |
+| `discord_delete_message` | Delete message |
+| `discord_bulk_delete_messages` | Delete up to 100 messages |
+| `discord_edit_message` | Edit message |
 | `discord_pin_message` | Pin message |
 | `discord_unpin_message` | Unpin message |
-| `discord_move_messages` | Move messages between channels |
+| `discord_move_messages` | Move between channels |
 
 ### Reactions
 | Tool | Description |
 |------|-------------|
 | `discord_add_reaction` | Add emoji reaction |
-| `discord_add_multiple_reactions` | Add multiple reactions at once |
+| `discord_add_multiple_reactions` | Add multiple reactions |
 | `discord_remove_reaction` | Remove reaction |
 
 ### Forums
 | Tool | Description |
 |------|-------------|
-| `discord_get_forum_channels` | List forum channels |
-| `discord_create_forum_post` | Create post with tags |
-| `discord_get_forum_post` | Get post with messages |
+| `discord_get_forum_channels` | List forums |
+| `discord_create_forum_post` | Create post |
+| `discord_get_forum_post` | Get post |
 | `discord_reply_to_forum` | Reply to post |
 | `discord_delete_forum_post` | Delete post |
 
@@ -244,100 +199,40 @@ Add to your Claude Desktop (`claude_desktop_config.json`) or Claude Code setting
 | `discord_edit_webhook` | Edit webhook |
 | `discord_delete_webhook` | Delete webhook |
 
-### Batch Operations
+### Batch
 | Tool | Description |
 |------|-------------|
-| `discord_batch_operations` | Execute multiple operations sequentially |
-
----
-
-## Permission Names
-
-Available permission flags for `discord_set_channel_permissions`:
-
-```
-ViewChannel          SendMessages         ReadMessageHistory
-ManageMessages       ManageChannels       ManageRoles
-Connect              Speak                MuteMembers
-DeafenMembers        MoveMembers          ManageWebhooks
-AddReactions         AttachFiles          EmbedLinks
-CreateInstantInvite  UseExternalEmojis    ManageThreads
-SendMessagesInThreads
-```
+| `discord_batch_operations` | Execute multiple operations |
 
 ---
 
 ## Examples
 
-### Ready-to-use Scripts
-
-Check the `examples/` folder for practical scripts:
+See `examples/` folder:
 
 | Script | Description |
 |--------|-------------|
-| `test-connection.js` | Verify bot connection |
-| `create-private-channel.js` | Create private channels with users/roles |
-| `send-announcement.js` | Send formatted embed announcements |
-| `list-server-info.js` | Display server roles, channels, members |
-| `bulk-role-assign.js` | Assign roles to multiple users |
+| `test-connection.js` | Quick connection test |
+| `create-private-channel.js` | Create private channels |
+| `send-announcement.js` | Send embed announcements |
+| `list-server-info.js` | Display server info |
+| `bulk-role-assign.js` | Assign roles in bulk |
 
 ```bash
-# Edit CONFIG in the script, then run:
-node examples/create-private-channel.js
-```
-
-### MCP Tool Examples
-
-### Hide category from @everyone
-```javascript
-discord_set_channel_permissions({
-  channelId: "CATEGORY_ID",
-  targetId: "EVERYONE_ROLE_ID", // Same as Guild ID
-  targetType: "role",
-  deny: ["ViewChannel"]
-})
-```
-
-### Allow role to access category
-```javascript
-discord_set_channel_permissions({
-  channelId: "CATEGORY_ID",
-  targetId: "ROLE_ID",
-  targetType: "role",
-  allow: ["ViewChannel", "SendMessages", "ReadMessageHistory"]
-})
-```
-
-### Create role with color
-```javascript
-discord_create_role({
-  guildId: "SERVER_ID",
-  name: "Developer",
-  color: "#3498DB",
-  hoist: true,
-  mentionable: true
-})
-```
-
-### Bulk delete messages
-```javascript
-discord_bulk_delete_messages({
-  channelId: "CHANNEL_ID",
-  limit: 50
-})
+node examples/test-connection.js
 ```
 
 ---
 
 ## Dependencies
 
-| Package | Version | Description |
-|---------|---------|-------------|
-| [@modelcontextprotocol/sdk](https://www.npmjs.com/package/@modelcontextprotocol/sdk) | ^1.25.1 | MCP SDK |
-| [discord.js](https://discord.js.org/) | ^14.25.1 | Discord API |
-| [zod](https://zod.dev/) | ^4.2.1 | Schema validation |
-| [express](https://expressjs.com/) | ^5.2.1 | HTTP server |
-| [dotenv](https://www.npmjs.com/package/dotenv) | ^17.2.3 | Environment variables |
+| Package | Description |
+|---------|-------------|
+| @modelcontextprotocol/sdk | MCP SDK |
+| discord.js | Discord API |
+| zod | Schema validation |
+| express | HTTP server |
+| dotenv | Environment variables |
 
 ---
 
@@ -348,4 +243,4 @@ discord_bulk_delete_messages({
 
 ## License
 
-[MIT](LICENSE) - Copyright (c) 2025 BarryY (Original), Kogollones (Extended)
+[MIT](LICENSE)
