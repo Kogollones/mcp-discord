@@ -18,7 +18,7 @@ jobs:
 
       - name: Create Release Archive
         run: |
-          zip -r mcp-discord-${{ github.ref_name }}.zip build/ package.json README.md LICENSE CHANGELOG.md .env.example config.example.json start-bot.bat.example
+          zip -r mcp-discord-${{ github.ref_name }}.zip build/ cli.js examples/ package.json README.md LICENSE CHANGELOG.md .env.example config.example.json start-bot.bat.example
 
       - name: Extract Changelog
         id: changelog
