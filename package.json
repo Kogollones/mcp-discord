@@ -1,0 +1,59 @@
+{
+  "name": "mcp-discord-extended",
+  "version": "2.0.0",
+  "description": "Extended Discord MCP server with role management, permissions, voice channels, and more",
+  "main": "build/index.js",
+  "bin": {
+    "mcp-discord": "build/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node build/index.js",
+    "prepublishOnly": "echo 'Ready to publish'"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "discord",
+    "claude",
+    "ai",
+    "chatbot",
+    "automation",
+    "roles",
+    "permissions",
+    "server-management"
+  ],
+  "author": "Kogollones",
+  "contributors": [
+    {
+      "name": "Barry Yip",
+      "email": "barry99625@gmail.com",
+      "url": "https://github.com/barryyip0625"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kogollones/mcp-discord.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kogollones/mcp-discord/issues"
+  },
+  "homepage": "https://github.com/Kogollones/mcp-discord#readme",
+  "files": [
+    "build/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.1",
+    "discord.js": "^14.25.1",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "zod": "^4.2.1"
+  }
+}

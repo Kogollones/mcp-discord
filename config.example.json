@@ -1,0 +1,32 @@
+{
+  "server": {
+    "port": 8080,
+    "statusCheckInterval": 10000,
+    "logLevel": "info"
+  },
+  "discord": {
+    "token": null,
+    "heartbeatInterval": 30000,
+    "gatewayIntents": [
+      "Guilds",
+      "GuildMessages",
+      "MessageContent"
+    ],
+    "reactionDelays": {
+      "single": 300,
+      "multiple": 500
+    },
+    "maxCacheSize": 1000
+  },
+  "cache": {
+    "ttlGuilds": 300000,
+    "ttlChannels": 120000,
+    "ttlRoles": 300000,
+    "ttlMembers": 60000
+  },
+  "rateLimiter": {
+    "maxConcurrent": 5,
+    "highThreshold": 3,
+    "queueTimeout": 30000
+  }
+}

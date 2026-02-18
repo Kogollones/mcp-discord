@@ -1,0 +1,14 @@
+@echo off
+echo Starting MCP Discord Server...
+echo Press Ctrl+C to stop.
+echo.
+REM Option 1: Use environment variable (recommended)
+node build\index.js
+
+REM Option 2: Pass token via command line (not recommended for production)
+REM node build\index.js --token YOUR_BOT_TOKEN_HERE --transport stdio
+
+REM Option 3: HTTP transport with custom port
+REM node build\index.js --token YOUR_BOT_TOKEN_HERE --transport http --port 8080
+
+pause
